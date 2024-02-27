@@ -16,17 +16,12 @@ import Foundation
 import XCTest
 
 func solution(_ num: Int) -> Int {
-    var sum = 0
-
     guard num > 3 else { return 0 }
 
-    for i in 3..<num {
-        if i % 3 == 0 || i % 5 == 0 {
-            sum += i
-        }
+    let solution: Int = (3..<num).reduce(0) { currentSum, candidateElement in
+        candidateElement % 3 == 0 || candidateElement % 5 == 0 ? currentSum + candidateElement : currentSum
     }
-
-    return sum
+    return solution
 }
 
 // MARK: - TestClass
