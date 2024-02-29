@@ -4,5 +4,6 @@
         <page name='twoSum'/>
         <page name='rectangleIntoSquares'/>
         <page name='sandBox'/>
+        <page name='Pyramid Array'/>
     </pages>
 </playground>
