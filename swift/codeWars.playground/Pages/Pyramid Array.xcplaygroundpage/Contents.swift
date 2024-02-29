@@ -13,19 +13,7 @@ import XCTest
 
 // MARK: - Pyramid function
 func pyramid(_ n: Int) -> [[Int]] {
-    var pyramid = [[Int]]()
-
-    guard n > 0 else { return [] }
-
-    for i in 1...n {
-        var innerArray = [Int]()
-        for _ in 1...i {
-            innerArray.append(1)
-        }
-        pyramid.append(innerArray)
-    }
-
-    return pyramid
+    (0..<n).map { Array(repeating: 1, count: $0 + 1) }
 }
 
 // MARK: - Testing Scenarios
