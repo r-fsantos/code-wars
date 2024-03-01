@@ -1,11 +1,3 @@
-
-
-
-
-
-import Foundation
-import XCTest
-
 // MARK: - Instructions
 /*
  Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence, which is the number of times you must multiply the digits in num until you reach a single digit.
@@ -18,6 +10,9 @@ import XCTest
     4 --> 0 (because 4 is already a one-digit number)
  ```
  */
+
+import Foundation
+import XCTest
 
 // MARK: - Function implementation
 func persistence(for num: Int) -> Int {
@@ -38,9 +33,9 @@ func persistence(for num: Int) -> Int {
         number = numbers.reduce(1, *)
         persistence += 1
 
-        print("numbers: \(numbers)\nnumber: \(number)")
+//        print("numbers: \(numbers)\nnumber: \(number)")
     }
-    print("persistence: \(persistence)")
+//    print("persistence: \(persistence)")
     return persistence
 }
 
@@ -57,52 +52,53 @@ func getNumberOfDigits(for number: Int, onBase baseNumber: Int = 10) -> Int {
     return numberOfDigits
 }
 
+// MARK: - Another solutions
+/// I'v imagined converting the Integer to string, then splitting and create, implement a casting and creating the final array.
+/// Then applying the reduce method
+func persistenceAlternative(for num: Int) -> Int {
+    var persistence = 0
 
-persistence(for: 4)
+    var numInDigits = getNumInDigits(from: num)
 
+    while numInDigits.count > 1 {
+        let numInDigitsProduct = numInDigits.reduce(1, *)
+        numInDigits = getNumInDigits(from: numInDigitsProduct)
+        persistence += 1
+    }
+
+    return persistence
+}
+
+func getNumInDigits(from num: Int) -> [Int] {
+    String(num).split(separator: "").compactMap { Int(String($0)) }
+}
+
+func persistenceRecursive(for num: Int) -> Int {
+    let numInDigits: [Int] = String(num).split(separator: "").compactMap { Int(String($0)) }
+
+    return numInDigits.count == 0 ? 0 : 1 + persistenceRecursive(for: numInDigits.reduce(1, *))
+}
 
 // MARK: - TestClass
 final class SolutionTests: XCTestCase {
-    static var allTests = [("solution", testSolution)]
+    static var allTests = [("solution", testSolution),
+                           ("alternativeSolution", testAlternativeSolution),
+                           ("persistenceRecursive", testPersistenceRecursive)]
 
     func testSolution() {
         XCTAssertEqual(persistence(for: 18), 1)
         XCTAssertEqual(persistence(for: 28), 2)
     }
+
+    func testAlternativeSolution() {
+        XCTAssertEqual(persistenceAlternative(for: 18), 1)
+        XCTAssertEqual(persistenceAlternative(for: 28), 2)
+    }
+
+    func testPersistenceRecursive() {
+        XCTAssertEqual(persistenceAlternative(for: 18), 1)
+        XCTAssertEqual(persistenceAlternative(for: 28), 2)
+    }
 }
 
 SolutionTests.defaultTestSuite.run()
-
-let opa: Double = 999
-let baseNumber: Double = 10
-
-
-let num: Int = 9
-
-var power = 0
-var test = 10
-
-while (num / exponentiation(10, power) > 0) {
-    power += 1
-}
-
-print(power)
-
-var divider = exponentiation(10, power - 1)
-var numbers = [Int]()
-
-var number = num
-
-for i in 1...power {
-    print(i)
-    numbers.append(number / divider)
-    number %= divider
-    divider /= 10
-}
-
-print(numbers)
-
-let product = numbers.reduce(1, *)
-print(product)
-
-
