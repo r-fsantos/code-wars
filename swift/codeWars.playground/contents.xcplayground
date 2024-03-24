@@ -7,5 +7,6 @@
         <page name='Multiples of 3 or 5'/>
         <page name='Persistent Bugger'/>
         <page name='Pyramid Array'/>
+        <page name='PileOfCubes'/>
     </pages>
 </playground>
