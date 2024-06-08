@@ -8,5 +8,6 @@
         <page name='Persistent Bugger'/>
         <page name='Pyramid Array'/>
         <page name='PileOfCubes'/>
+        <page name='Find Missing on PA'/>
     </pages>
 </playground>
